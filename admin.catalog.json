@@ -1,0 +1,6 @@
+{
+  "name": "allstar.schema.json",
+  "description": "Allstar repo admin configuration",
+  "fileMatch": [ "admin.json"],
+  "url": "https://json.schemastore.org/allstar.admin.schema.json"
+}
