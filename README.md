@@ -3,7 +3,7 @@
 This project is for drafting JSON schemae for OpenSSF's Allstar tool.  They will
 eventually live somewhere else, but for now, here they are.
 
-[!CAUTION]
+> [!CAUTION]
 > This is VERY much in development and things may not work properly.
 
 ## Plans
