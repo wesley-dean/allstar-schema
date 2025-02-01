@@ -1,0 +1,6 @@
+{
+  "name": "allstar.branch_protection.schema.json",
+  "description": "Allstar branch protection configuration",
+  "fileMatch": [ "branch_protection.json"],
+  "url": "https://json.schemastore.org/allstar.branch_protection.schema.json"
+}

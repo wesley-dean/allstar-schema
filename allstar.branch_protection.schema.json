@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/allstar.branch_protection.schema.json",
+  "title": "branch_protection.yaml",
+  "description": "The schema for OpenSSF's Allstar branch protection configuration",
+  "type": "object",
+  "properties": {
+    "optConfig": {
+      "$ref": "#/definitions/OrgOptConfig"
+    },
+    "action": {
+      "$ref": "#/definitions/Action"
+    },
+    "enforceDefault": {
+      "$ref": "#/definitions/EnforceDefault"
+    },
+    "enforceBranches": {
+      "$ref": "#/definitions/Branches"
+    },
+    "requireApproval": {
+      "$ref": "#/definitions/RequireApproval"
+    },
+    "requireCodeOwnerReviews": {
+      "$ref": "#/definitions/RequireCodeOwnerReviews"
+    },
+    "approvalCount": {
+      "$ref": "#/definitions/ApprovalCount"
+    },
+    "dismissStale": {
+      "$ref": "#/definitions/DismissStale"
+    },
+    "blockForce": {
+      "$ref": "#/definitions/BlockForce"
+    },
+    "enforceOnAdmins": {
+      "$ref": "#/definitions/EnforceOnAdmins"
+    },
+    "requireUpToDateBranch": {
+      "$ref": "#/definitions/RequireUpToDateBranch"
+    },
+    "requireStatusChecks": {
+      "$ref": "#/definitions/StatusChecks"
+    },
+    "requireSignedCommits": {
+      "$ref": "#/definitions/RequireSignedCommits"
+    }
+  },
+  "required": ["optConfig"],
+  "definitions": {
+    "OrgOptConfig": {
+      "type": "object",
+      "properties": {
+        "optOutStrategy": {
+          "$ref": "#/definitions/OptOutStrategy"
+        },
+        "optInRepos": {
+          "$ref": "#/definitions/OptInRepos"
+        },
+        "optOutRepos": {
+          "$ref": "#/definitions/OptOutRepos"
+        },
+        "optOutPrivateRepos": {
+          "$ref": "#/definitions/OptOutPrivateRepos"
+        },
+        "optOutPublicRepos": {
+          "$ref": "#/definitions/OptOutPublicRepos"
+        },
+        "optOutArchivedRepos": {
+          "$ref": "#/definitions/OptOutArchivedRepos"
+        },
+        "optOutForkedRepos": {
+          "$ref": "#/definitions/OptOutForkedRepos"
+        },
+        "disableRepoOverride": {
+          "$ref": "#/definitions/DisableRepoOverride"
+        }
+      }
+    },
+    "OptOutStrategy": {
+      "type": "boolean",
+      "description": "OptOutStrategy : set to true to change from opt-in to opt-out."
+    },
+    "OptInRepos": {
+      "type": "array",
+      "description": "OptInRepos is the list of repos to opt-in when in opt-in strategy.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutRepos": {
+      "type": "array",
+      "description": "OptOutRepos is the list of repos to opt-out when in opt-out strategy.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutPrivateRepos": {
+      "type": "boolean",
+      "description": "OptOutPrivateRepos : set to true to not access private repos."
+    },
+    "OptOutPublicRepos": {
+      "type": "boolean",
+      "description": "OptOutPublicRepos : set to true to not access public repos."
+    },
+    "OptOutArchivedRepos": {
+      "type": "boolean",
+      "description": "OptOutArchivedRepos : set to true to opt-out archived repositories."
+    },
+    "OptOutForkedRepos": {
+      "type": "boolean",
+      "description": "OptOutForkedRepos : set to true to opt-out forked repositories."
+    },
+    "DisableRepoOverride": {
+      "type": "boolean",
+      "description": "DisableRepoOverride : set to true to disallow repos from opt-in/out in their config."
+    },
+    "Action": {
+      "type": "string",
+      "description": "Action overrides the same setting in org-level, only if present.",
+      "enum": ["log", "issue", "fix"]
+    },
+    "OptInRepo": {
+      "type": "array",
+      "description": "a list of repositories that are opting-in to scanning",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutRepo": {
+      "type": "array",
+      "description": "a list of repositories that are opting-out of scanning",
+      "items": {
+        "type": "string"
+      }
+    },
+    "EnforceDefault": {
+      "type": "boolean",
+      "description": "enforceDefault : set to true to enforce policy on default branch, default true."
+    },
+    "RequireApproval": {
+      "type": "boolean",
+      "description": "requireApproval : set to true to enforce approval on PRs, default true. When this config is false, ApprovalCount will always be set to 0."
+    },
+    "RequireCodeOwnerReviews": {
+      "type": "boolean",
+      "description": "requireCodeOwnerReviews : set to true to enforce code owner reviews on PRs, default false. If set to true, then requireApproval must also be true"
+    },
+    "ApprovalCount": {
+      "type": "integer",
+      "description": "approvalCount is the number of required PR approvals, default 1."
+    },
+    "DismissStale": {
+      "type": "boolean",
+      "description": "dismissStale : set to true to require PR approvals be dismissed when a PR is updated, default true."
+    },
+    "StatusChecks": {
+      "type": "list",
+      "description": "requireStatusChecks is a list of status checks that are required in order to merge into the protected branch. Each entry must specify the context, and optionally an appID.",
+      "items": {
+        "$ref": "#/definitions/StatusCheck"
+      }
+    },
+    "StatusCheck": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/Context"
+        },
+        "appId": {
+          "$ref": "#/definitions/AppId"
+        }
+      }
+    },
+    "Context": {
+      "type": "string",
+      "description": "context is the status check name that should be required."
+    },
+    "AppId": {
+      "type": "integer",
+      "description": "appID, when provided, will require that the status check be set by the GitHub App with the given AppID. When omitted, any app can provide the required status check."
+    },
+    "Branches": {
+      "type": "array",
+      "description": "list of branches",
+      "items": {
+        "type": "string"
+      }
+    },
+    "EnforceBranches": {
+      "anyOf": [
+        {
+          "$ref": "#/descriptions/Branches"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/descriptions/Branches"
+          }
+        }
+      ]
+    }
+  }
+}
