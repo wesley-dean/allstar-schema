@@ -1,0 +1,240 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/allstar.codeowners.schema.json",
+  "title": "outside.yaml",
+  "description": "The schema for OpenSSF's Allstar codeowners configuration",
+  "type": "object",
+  "properties": {
+    "optConfig": {
+      "$ref": "#/definitions/OrgOptConfig"
+    },
+    "action": {
+      "$ref": "#/definitions/Action"
+    },
+    "groups": {
+      "$ref": "#/definitions/RuleGroups"
+    }
+  },
+  "required": ["optConfig"],
+  "definitions": {
+    "OrgOptConfig": {
+      "type": "object",
+      "properties": {
+        "optOutStrategy": {
+          "$ref": "#/definitions/OptOutStrategy"
+        },
+        "optInRepos": {
+          "$ref": "#/definitions/OptInRepos"
+        },
+        "optOutRepos": {
+          "$ref": "#/definitions/OptOutRepos"
+        },
+        "optOutPrivateRepos": {
+          "$ref": "#/definitions/OptOutPrivateRepos"
+        },
+        "optOutPublicRepos": {
+          "$ref": "#/definitions/OptOutPublicRepos"
+        },
+        "optOutArchivedRepos": {
+          "$ref": "#/definitions/OptOutArchivedRepos"
+        },
+        "optOutForkedRepos": {
+          "$ref": "#/definitions/OptOutForkedRepos"
+        },
+        "disableRepoOverride": {
+          "$ref": "#/definitions/DisableRepoOverride"
+        }
+      }
+    },
+    "OptOutStrategy": {
+      "type": "boolean",
+      "description": "OptOutStrategy : set to true to change from opt-in to opt-out."
+    },
+    "OptInRepos": {
+      "type": "array",
+      "description": "OptInRepos is the list of repos to opt-in when in opt-in strategy.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutRepos": {
+      "type": "array",
+      "description": "OptOutRepos is the list of repos to opt-out when in opt-out strategy.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutPrivateRepos": {
+      "type": "boolean",
+      "description": "OptOutPrivateRepos : set to true to not access private repos."
+    },
+    "OptOutPublicRepos": {
+      "type": "boolean",
+      "description": "OptOutPublicRepos : set to true to not access public repos."
+    },
+    "OptOutArchivedRepos": {
+      "type": "boolean",
+      "description": "OptOutArchivedRepos : set to true to opt-out archived repositories."
+    },
+    "OptOutForkedRepos": {
+      "type": "boolean",
+      "description": "OptOutForkedRepos : set to true to opt-out forked repositories."
+    },
+    "DisableRepoOverride": {
+      "type": "boolean",
+      "description": "DisableRepoOverride : set to true to disallow repos from opt-in/out in their config."
+    },
+    "Action": {
+      "type": "string",
+      "description": "Action overrides the same setting in org-level, only if present.",
+      "enum": ["log", "issue"]
+    },
+    "OptInRepo": {
+      "type": "array",
+      "description": "a list of repositories that are opting-in to scanning",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutRepo": {
+      "type": "array",
+      "description": "a list of repositories that are opting-out of scanning",
+      "items": {
+        "type": "string"
+      }
+    },
+    "RepoSelector": {
+      "type": "object",
+      "description": "repoSelector specifies a selection of repos",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/RepoName"
+        },
+        "language": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RepoLanguage"
+          },
+          "exclude": {
+            "type": "array",
+            "description": "exclude is a set of RepoSelectors targeting repos that should not be matched by this selector.",
+            "items": {
+              "$ref": "#/definitions/RepoSelector"
+            }
+          }
+        }
+      }
+    },
+    "RepoName": {
+      "type": "string",
+      "description": "name is the repo name in glob format"
+    },
+    "RepoLanguage": {
+      "type": "string",
+      "description": "language is a programming languages. "
+    },
+    "RuleGroups": {
+      "type": "array",
+      "description": "ruleGroups is a collection of RuleGroup objects.",
+      "items": {
+        "$ref": "#/definitions/RuleGroup"
+      }
+    },
+    "RuleGroup": {
+      "type": "object",
+      "description": "ruleGroup is used to apply rules to repos matched by RepoSelectors.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/RuleName"
+        },
+        "rules": {
+          "type": "array",
+          "description": "rules is the set of rules to apply for this RuleGroup. Rules are applied in order of priority, with allow/require rules evaluated before deny rules at each priority tier.",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        },
+        "repos": {
+          "type": "array",
+          "description": "repos is the set of RepoSelectors to use when deciding whether a repo qualifies for this RuleGroup.",
+          "items": {
+            "$ref": "#/definitions/Repo"
+          }
+        }
+      }
+    },
+
+    "Rule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/RuleName"
+        },
+        "method": {
+          "$ref": "#/definitions/RuleMethod"
+        },
+        "priority": {
+          "$ref": "#/definitions/RulePriority"
+        },
+        "actions": {
+          "$ref": "#/definitions/Actions"
+        },
+        "mustPass": {
+          "$ref": "#/definitions/RuleMustPass"
+        },
+        "requireAll": {
+          "$ref": "#/definitions/RuleRequireAll"
+        }
+      }
+    },
+    "RuleName": {
+      "type": "string",
+      "description": "name is the name used to identify the rule"
+    },
+    "RuleMethod": {
+      "type": "string",
+      "description": "method is the type of rule. One of require, allow, and deny.",
+      "enum": ["require", "allow", "deny"]
+    },
+    "RulePriority": {
+      "type": "string",
+      "description": "priority is the priority tier identifier applied to the rule. Options are urgent, high, medium, and low",
+      "enum": ["urgent", "high", "medium", "low"]
+    },
+    "RuleMustPass": {
+      "type": "boolean",
+      "description": "mustPass specifies whether the rule's Action(s) are required to be part of a passing workflow on latest commit. (for use with the require method)"
+    },
+    "RuleRequireAll": {
+      "type": "boolean",
+      "description": "requireAll specifies that all Actions listed should be required, rather than just one. (for use with require method)"
+    },
+
+    "ActionName": {
+      "type": "string",
+      "description": "name is the Action name in glob format"
+    },
+    "Version": {
+      "type": "string",
+      "description": "Version is a semver condition or commit ref; default, nil, targets any version"
+    },
+    "Actions": {
+      "type": "array",
+      "description": "actions is a set of ActionSelectors. If nil, all Actions will be selected",
+      "items": {
+        "$ref": "#/definitions/ActionSelectors"
+      }
+    },
+    "ActionSelectors": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ActionName"
+        },
+        "version": {
+          "$ref": "#/definitions/Version"
+        }
+      }
+    }
+  }
+}
