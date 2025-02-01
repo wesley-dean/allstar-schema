@@ -18,9 +18,7 @@
       "$ref": "#/definitions/Threshold"
     }
   },
-  "required": [
-    "optConfig"
-  ],
+  "required": ["optConfig"],
   "definitions": {
     "OrgOptConfig": {
       "type": "object",
@@ -92,11 +90,7 @@
     "Action": {
       "type": "string",
       "description": "Action overrides the same setting in org-level, only if present.",
-      "enum": [
-        "log",
-        "issue",
-        "fix"
-      ]
+      "enum": ["log", "issue", "fix"]
     },
     "OptInRepo": {
       "type": "array",
@@ -118,11 +112,37 @@
       "minimum": 0,
       "maximum": 10
     },
+    "Check": {
+      "type": "string",
+      "description": "a check names to run from OpenSSF Scorecard. This must match the name that the check uses in its call to registerCheck. For example, the name for the Signed Releases check is Signed-Releases",
+      "enum": [
+        "Binary-Artifacts",
+        "Branch-Protection",
+        "CI-Tests",
+        "CII-Best-Practices",
+        "Code-Review",
+        "Contributors",
+        "Dangerous-Workflow",
+        "Dependency-Update-Tool",
+        "Fuzzing",
+        "License",
+        "Maintained",
+        "Packaging",
+        "Pinned-Dependencies",
+        "SAST",
+        "SBOM",
+        "Security-Policy",
+        "Signed-Releases",
+        "Token-Permissions",
+        "Vulnerabilities",
+        "Webhooks"
+      ]
+    },
     "Checks": {
       "type": "array",
       "description": "a list of Scorecard checks that are to be considered",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/Check"
       }
     }
   }
