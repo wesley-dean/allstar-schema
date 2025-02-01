@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/allstar.outside.schema.json",
+  "title": "outside.yaml",
+  "description": "The schema for OpenSSF's Allstar outside contributor configuration",
+  "type": "object",
+  "properties": {
+    "optConfig": {
+      "$ref": "#/definitions/OrgOptConfig"
+    },
+    "action": {
+      "$ref": "#/definitions/Action"
+    },
+    "pushAllowed": {
+      "$ref": "#/definitions/Push"
+    },
+    "adminAllowed": {
+      "$ref": "#/definitions/Admin"
+    },
+    "exemptions": {
+      "$ref": "#/definitions/Exemptions"
+    }
+  },
+  "required": [
+    "optConfig"
+  ],
+  "definitions": {
+    "OrgOptConfig": {
+      "type": "object",
+      "properties": {
+        "optOutStrategy": {
+          "$ref": "#/definitions/OptOutStrategy"
+        },
+        "optInRepos": {
+          "$ref": "#/definitions/OptInRepos"
+        },
+        "optOutRepos": {
+          "$ref": "#/definitions/OptOutRepos"
+        },
+        "optOutPrivateRepos": {
+          "$ref": "#/definitions/OptOutPrivateRepos"
+        },
+        "optOutPublicRepos": {
+          "$ref": "#/definitions/OptOutPublicRepos"
+        },
+        "optOutArchivedRepos": {
+          "$ref": "#/definitions/OptOutArchivedRepos"
+        },
+        "optOutForkedRepos": {
+          "$ref": "#/definitions/OptOutForkedRepos"
+        },
+        "disableRepoOverride": {
+          "$ref": "#/definitions/DisableRepoOverride"
+        }
+      }
+    },
+    "Exemptions": {
+      "type": "array",
+      "description": "Exemptions is a list of user-repo-access pairings to exempt.  Exemptions are only defined at the org level because they should be made obvious to org security managers.",
+      "items": {
+        "$ref": "#/definitions/OutsideExemption"
+      }
+    },
+    "OutsideExemption": {
+      "type": "object",
+      "description": "OutsideExemption is an exemption entry for the Outside Collaborators policy.",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "repo": {
+          "$ref": "#/definitions/Repo"
+        },
+        "push": {
+          "$ref": "#/definitions/Push"
+        },
+        "adminAllowed": {
+          "$ref": "#/definitions/Admin"
+        }
+      }
+    },
+    "OptOutStrategy": {
+      "type": "boolean",
+      "description": "OptOutStrategy : set to true to change from opt-in to opt-out."
+    },
+    "OptInRepos": {
+      "type": "array",
+      "description": "OptInRepos is the list of repos to opt-in when in opt-in strategy.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutRepos": {
+      "type": "array",
+      "description": "OptOutRepos is the list of repos to opt-out when in opt-out strategy.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutPrivateRepos": {
+      "type": "boolean",
+      "description": "OptOutPrivateRepos : set to true to not access private repos."
+    },
+    "OptOutPublicRepos": {
+      "type": "boolean",
+      "description": "OptOutPublicRepos : set to true to not access public repos."
+    },
+    "OptOutArchivedRepos": {
+      "type": "boolean",
+      "description": "OptOutArchivedRepos : set to true to opt-out archived repositories."
+    },
+    "OptOutForkedRepos": {
+      "type": "boolean",
+      "description": "OptOutForkedRepos : set to true to opt-out forked repositories."
+    },
+    "DisableRepoOverride": {
+      "type": "boolean",
+      "description": "DisableRepoOverride : set to true to disallow repos from opt-in/out in their config."
+    },
+    "Action": {
+      "type": "string",
+      "description": "Action overrides the same setting in org-level, only if present.",
+      "enum": [
+        "log",
+        "issue",
+        "fix"
+      ]
+    },
+    "User": {
+      "type": "string",
+      "description": "User is a GitHub username"
+    },
+    "Repo": {
+      "type": "string",
+      "description": "Repo is a GitHub repo name"
+    },
+    "Push": {
+      "type": "boolean",
+      "description": "Push allows push permission"
+    },
+    "Admin": {
+      "type": "boolean",
+      "description": "Admin allows admin permission"
+    },
+    "OptInRepo": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutRepo": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Exemption": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

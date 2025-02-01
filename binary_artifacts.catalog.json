@@ -1,0 +1,6 @@
+{
+  "name": "allstar.binary_artifacts.schema.json",
+  "description": "Allstar binary artifact configuration",
+  "fileMatch": [ "binary_artifacts.json"],
+  "url": "https://json.schemastore.org/allstar.binary_artifacts.schema.json"
+}

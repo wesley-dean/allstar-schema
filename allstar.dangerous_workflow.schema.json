@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/security.schema.json",
+  "title": "binary_artifacts.yaml",
+  "description": "The schema for OpenSSF's Allstar dangerous workflow configuration",
+  "type": "object",
+  "properties": {
+    "optConfig": {
+      "$ref": "#/definitions/OrgOptConfig"
+    },
+    "action": {
+      "$ref": "#/definitions/Action"
+    }
+  },
+  "required": [
+    "optConfig"
+  ],
+  "definitions": {
+    "OrgOptConfig": {
+      "type": "object",
+      "properties": {
+        "optOutStrategy": {
+          "type": "boolean"
+        },
+        "optInRepos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optOutRepos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optOutPrivateRepos": {
+          "type": "boolean"
+        },
+        "optOutPublicRepos": {
+          "type": "boolean"
+        },
+        "optOutArchivedRepos": {
+          "type": "boolean"
+        },
+        "optOutForkedRepos": {
+          "type": "boolean"
+        },
+        "disableRepoOverride": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OptOutStrategy": {
+      "type": "boolean",
+      "description": "OptOutStrategy : set to true to change from opt-in to opt-out."
+    },
+    "OptInRepos": {
+      "type": "array",
+      "description": "OptInRepos is the list of repos to opt-in when in opt-in strategy.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutRepos": {
+      "type": "array",
+      "description": "OptOutRepos is the list of repos to opt-out when in opt-out strategy.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OptOutPrivateRepos": {
+      "type": "boolean",
+      "description": "OptOutPrivateRepos : set to true to not access private repos."
+    },
+    "OptOutPublicRepos": {
+      "type": "boolean",
+      "description": "OptOutPublicRepos : set to true to not access public repos."
+    },
+    "OptOutArchivedRepos": {
+      "type": "boolean",
+      "description": "OptOutArchivedRepos : set to true to opt-out archived repositories."
+    },
+    "OptOutForkedRepos": {
+      "type": "boolean",
+      "description": "OptOutForkedRepos : set to true to opt-out forked repositories."
+    },
+    "DisableRepoOverride": {
+      "type": "boolean",
+      "description": "DisableRepoOverride : set to true to disallow repos from opt-in/out in their config."
+    },
+    "Action": {
+      "type": "string",
+      "enum": [
+        "log",
+        "issue",
+        "fix"
+      ]
+    }
+  }
+}

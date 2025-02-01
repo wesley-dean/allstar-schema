@@ -1,0 +1,6 @@
+{
+  "name": "allstar.dangerous_workflow.schema.json",
+  "description": "Allstar dangerous workflow configuration",
+  "fileMatch": [ "dangerous_workflow.json"],
+  "url": "https://json.schemastore.org/allstar.dangerous_workflow.schema.json"
+}
