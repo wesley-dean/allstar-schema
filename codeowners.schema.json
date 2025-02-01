@@ -1,6 +1,0 @@
-{
-  "name": "allstar.schema.json",
-  "description": "Allstar security policy configuration",
-  "fileMatch": [ "security.json"],
-  "url": "https://json.schemastore.org/allstar.security.schema.json"
-}
