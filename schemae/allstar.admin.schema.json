@@ -33,7 +33,7 @@
       "$ref": "#/definitions/TeamAdminsAllowed"
     },
     "maxNumberAdminTeams": {
-      "$ref": "#/definition/MaxNumberAdminTeams"
+      "$ref": "#/definitions/MaxNumberAdminTeams"
     }
   },
   "required": [

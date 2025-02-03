@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-SCHEMA_PREFIX="${SCHEMA_PREFIX:-./allstar.}"
+SCHEMA_PREFIX="${SCHEMA_PREFIX:-$(git rev-parse --show-toplevel)/schemae/allstar.}"
 SCHEMA_SUFFIX="${SCHEMA_SUFFIX:-.schema.json}"
+
+# test filenames look like this:
+# tests/admin.01.yaml
 
 for file in "$@" ; do
   if [ -e "$file" ] ; then
@@ -15,8 +18,11 @@ for file in "$@" ; do
     # just the filename
     filename="${file##*/}"
 
+    # strip the test number off of the filename
+    filename_no_test="${filename%%.*}"
+
     # strip the extension off of the filename
-    filebase="${filename%%.*}"
+    filebase="${filename_no_test%%.*}"
 
     schema_filename="${SCHEMA_PREFIX}${filebase}${SCHEMA_SUFFIX}"
 
