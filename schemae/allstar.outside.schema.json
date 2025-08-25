@@ -85,7 +85,7 @@
       "additionalProperties": false
     }
   },
-  anyOf": [
+  "anyOf": [
     {
       "$ref": "#/definitions/OrgConfig"
     },
