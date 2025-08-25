@@ -29,6 +29,9 @@ for file in "$@" ; do
     if [ -f "${schema_filename}" ] ; then
       echo "Comparing '$filename' with schema '$schema_filename'"
       v8r --schema "${schema_filename}" "${file}"
+    else
+      echo "No test file '${schema_filename}' for '$file'"
     fi
   fi
+
 done

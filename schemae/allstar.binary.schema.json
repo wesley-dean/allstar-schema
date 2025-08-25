@@ -1,7 +1,7 @@
 {
-  "$id": "https://json.schemastore.org/allstar.codeowners.schema.json",
+  "$id": "https://json.schemastore.org/allstar.binary.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Allstar CODEOWNERS policy configuration",
+  "title": "Allstar Binary Artifacts policy configuration",
   "type": "object",
   "definitions": {
     "OrgConfig": {
@@ -16,10 +16,12 @@
           "type": "string",
           "default": "log"
         },
-        "requireCODEOWNERS": {
-          "description": "Require presence of a CODEOWNERS file. Default false only validates an existing file.",
-          "type": "boolean",
-          "default": false
+        "ignoreFiles": {
+          "type": "array",
+          "description": "List of file names to ignore. Binary artifacts with these names are allowed. File name only, not a path. Globs are not allowed.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -39,9 +41,12 @@
           "description": "Override for org-level action when present",
           "type": "string"
         },
-        "requireCODEOWNERS": {
-          "description": "Require presence of a CODEOWNERS file. Default false only validates an existing file.",
-          "type": "boolean"
+        "ignorePaths": {
+          "type": "array",
+          "description": "List of full paths to ignore. If a binary artifact is reported at these paths, it is ignored. Must be full paths with directories. Globs are not allowed. Allowed even if repo override is disabled.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false
