@@ -1,149 +1,74 @@
 {
+  "$id": "https://json.schemastore.org/allstar.scorecard.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://example.com/allstar.scorecode.schema.json",
-  "title": "outside.yaml",
-  "description": "The schema for OpenSSF's Allstar Scorecard configuration",
+  "title": "Allstar Scorecard policy configuration",
   "type": "object",
-  "properties": {
-    "optConfig": {
-      "$ref": "#/definitions/OrgOptConfig"
-    },
-    "action": {
-      "$ref": "#/definitions/Action"
-    },
-    "checks": {
-      "$ref": "#/definitions/Checks"
-    },
-    "threshold": {
-      "$ref": "#/definitions/Threshold"
-    }
-  },
-  "required": ["optConfig"],
   "definitions": {
-    "OrgOptConfig": {
+    "OrgConfig": {
       "type": "object",
       "properties": {
-        "optOutStrategy": {
-          "$ref": "#/definitions/OptOutStrategy"
+        "optConfig": {
+          "type": "object",
+          "description": "Standard org-level opt-in or opt-out configuration. RepoOverride applies to all configuration."
         },
-        "optInRepos": {
-          "$ref": "#/definitions/OptInRepos"
+        "action": {
+          "description": "Which action to take. Default log; other options include issue.",
+          "type": "string",
+          "default": "log"
         },
-        "optOutRepos": {
-          "$ref": "#/definitions/OptOutRepos"
+        "checks": {
+          "type": "array",
+          "description": "List of check names to run from OpenSSF Scorecard. Must match the name used in the check's registration.",
+          "items": {
+            "type": "string"
+          }
         },
-        "optOutPrivateRepos": {
-          "$ref": "#/definitions/OptOutPrivateRepos"
-        },
-        "optOutPublicRepos": {
-          "$ref": "#/definitions/OptOutPublicRepos"
-        },
-        "optOutArchivedRepos": {
-          "$ref": "#/definitions/OptOutArchivedRepos"
-        },
-        "optOutForkedRepos": {
-          "$ref": "#/definitions/OptOutForkedRepos"
-        },
-        "disableRepoOverride": {
-          "$ref": "#/definitions/DisableRepoOverride"
+        "threshold": {
+          "description": "Score threshold that checks must meet to pass the policy. Default is the maximum result score defined by scorecard.",
+          "type": "integer"
         }
-      }
+      },
+      "required": [
+        "optConfig",
+        "action"
+      ],
+      "additionalProperties": false
     },
-    "OptOutStrategy": {
-      "type": "boolean",
-      "description": "OptOutStrategy : set to true to change from opt-in to opt-out."
-    },
-    "OptInRepos": {
-      "type": "array",
-      "description": "OptInRepos is the list of repos to opt-in when in opt-in strategy.",
-      "items": {
-        "type": "string"
-      }
-    },
-    "OptOutRepos": {
-      "type": "array",
-      "description": "OptOutRepos is the list of repos to opt-out when in opt-out strategy.",
-      "items": {
-        "type": "string"
-      }
-    },
-    "OptOutPrivateRepos": {
-      "type": "boolean",
-      "description": "OptOutPrivateRepos : set to true to not access private repos."
-    },
-    "OptOutPublicRepos": {
-      "type": "boolean",
-      "description": "OptOutPublicRepos : set to true to not access public repos."
-    },
-    "OptOutArchivedRepos": {
-      "type": "boolean",
-      "description": "OptOutArchivedRepos : set to true to opt-out archived repositories."
-    },
-    "OptOutForkedRepos": {
-      "type": "boolean",
-      "description": "OptOutForkedRepos : set to true to opt-out forked repositories."
-    },
-    "DisableRepoOverride": {
-      "type": "boolean",
-      "description": "DisableRepoOverride : set to true to disallow repos from opt-in/out in their config."
-    },
-    "Action": {
-      "type": "string",
-      "description": "Action overrides the same setting in org-level, only if present.",
-      "enum": ["log", "issue", "fix"]
-    },
-    "OptInRepo": {
-      "type": "array",
-      "description": "a list of repositories that are opting-in to scanning",
-      "items": {
-        "type": "string"
-      }
-    },
-    "OptOutRepo": {
-      "type": "array",
-      "description": "a list of repositories that are opting-out of scanning",
-      "items": {
-        "type": "string"
-      }
-    },
-    "Threshold": {
-      "type": "integer",
-      "description": "all checks must meet or exceed this number",
-      "minimum": 0,
-      "maximum": 10
-    },
-    "Check": {
-      "type": "string",
-      "description": "a check names to run from OpenSSF Scorecard. This must match the name that the check uses in its call to registerCheck. For example, the name for the Signed Releases check is Signed-Releases",
-      "enum": [
-        "Binary-Artifacts",
-        "Branch-Protection",
-        "CI-Tests",
-        "CII-Best-Practices",
-        "Code-Review",
-        "Contributors",
-        "Dangerous-Workflow",
-        "Dependency-Update-Tool",
-        "Fuzzing",
-        "License",
-        "Maintained",
-        "Packaging",
-        "Pinned-Dependencies",
-        "SAST",
-        "SBOM",
-        "Security-Policy",
-        "Signed-Releases",
-        "Token-Permissions",
-        "Vulnerabilities",
-        "Webhooks"
-      ]
-    },
-    "Checks": {
-      "type": "array",
-      "description": "a list of Scorecard checks that are to be considered",
-      "items": {
-        "$ref": "#/definitions/Check"
-      }
+    "RepoConfig": {
+      "type": "object",
+      "properties": {
+        "optConfig": {
+          "type": "object",
+          "description": "Standard repo-level opt-in or opt-out configuration."
+        },
+        "action": {
+          "description": "Override for org-level action when present",
+          "type": "string"
+        },
+        "checks": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Override for org-level checks when present",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threshold": {
+          "description": "Override for org-level threshold when present",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
     }
-  }
+  },
+  "anyOf": [
+    {
+      "$ref": "#/definitions/OrgConfig"
+    },
+    {
+      "$ref": "#/definitions/RepoConfig"
+    }
+  ]
 }
