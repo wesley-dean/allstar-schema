@@ -1,0 +1,15 @@
+{
+  "name": "allstar-schema",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test:schemae": "bash bin/validate.bash schemae/*.json",
+    "test:fixtures": "bash bin/test.bash tests/*.yaml",
+    "test:publication": "node bin/check-schemae.cjs",
+    "test": "npm run test:schemae && npm run test:fixtures && npm run test:publication"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "v8r": "6.1.0"
+  }
+}

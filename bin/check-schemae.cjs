@@ -2,16 +2,23 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const Ajv = require("ajv");
+const Ajv2020 = require("ajv/dist/2020");
 const root = path.resolve(__dirname, "..");
 const schemas = new Map();
 const ajv = new Ajv({ strict: true });
+const ajv2020 = new Ajv2020({ strict: true });
+const validators = new Map();
 for (const name of fs.readdirSync(path.join(root, "schemae"))) {
   if (!name.endsWith(".json")) continue;
   assert.match(name, /^allstar-[a-z]+\.json$/);
   const schema = JSON.parse(fs.readFileSync(path.join(root, "schemae", name), "utf8"));
   assert.equal(schema.$id, "https://json.schemastore.org/" + name);
   schemas.set(schema.$id, schema);
-  ajv.addSchema(schema);
+  const validator = schema.$schema === "https://json-schema.org/draft/2020-12/schema"
+    ? ajv2020
+    : ajv;
+  validator.addSchema(schema);
+  validators.set(schema.$id, validator);
 }
 const seen = new Set();
 const titles = new Set();
@@ -26,7 +33,7 @@ for (const name of fs.readdirSync(path.join(root, "catalog"))) {
   assert.deepEqual(entry.fileMatch || [], name === "allstar.catalog.json" ? ["allstar.json"] : []);
 }
 assert.equal(seen.size, schemas.size);
-for (const id of schemas.keys()) assert(ajv.getSchema(id), id);
+for (const id of schemas.keys()) assert(validators.get(id).getSchema(id), id);
 const branch = ajv.getSchema("https://json.schemastore.org/allstar-branch.json#/definitions/StatusCheck");
 for (const appID of [null, 1]) assert(branch({context: "test", appID}));
 for (const appID of ["1", 1.5, false]) assert(!branch({context: "test", appID}));
