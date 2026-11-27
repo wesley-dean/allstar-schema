@@ -40,4 +40,7 @@ for (const appID of ["1", 1.5, false]) assert(!branch({context: "test", appID}))
 const scorecard = ajv.getSchema("https://json.schemastore.org/allstar-scorecard.json#/definitions/RepoConfig");
 for (const checks of [null, [], ["test"]]) assert(scorecard({checks}));
 for (const checks of ["test", [1], false]) assert(!scorecard({checks}));
+const day = ajv2020.getSchema("https://json.schemastore.org/allstar-allstar.json#/definitions/Day");
+for (const value of ["monday", "saturday", "wednesday"]) assert(day(value));
+for (const value of ["mon", ["monday"], null]) assert(!day(value));
 console.log("SchemaStore compatibility checks passed.");
