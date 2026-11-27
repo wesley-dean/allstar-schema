@@ -730,8 +730,7 @@
       "examples": [
         "monday",
         "saturday"
-      ],
-      "maxitems": 3
+      ]
     },
     "Interval": {
       "type": "string",

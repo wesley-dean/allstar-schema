@@ -65,3 +65,18 @@ not auto-matched; consumers can select the appropriate schema explicitly.
 With Node.js and AJV 8 installed locally, run `node bin/check-schemae.cjs`
 to verify catalog consistency, strict compilation, and nullable type regression
 cases. Run the existing v8r fixture tests separately.
+
+## Continuous integration
+
+The `test-schemae` GitHub Actions check runs schema validation, fixture
+validation, and strict AJV publication checks on pull requests, pushes to
+`main`, and manual dispatch. To run the same checks locally with Node.js 24:
+
+```bash
+npm install --ignore-scripts
+npm test
+```
+
+The schema validation step uses the existing SchemaStore base schema URL;
+network access is required. Direct tool versions are pinned in `package.json`
+for Renovate maintenance.
