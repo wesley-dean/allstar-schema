@@ -1,7 +1,7 @@
 {
-  "$id": "https://json.schemastore.org/allstar.workflow.schema.json",
+  "$id": "https://json.schemastore.org/allstar-codeowners.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Allstar Dangerous Workflow policy configuration",
+  "title": "Allstar CODEOWNERS policy configuration",
   "type": "object",
   "definitions": {
     "OrgConfig": {
@@ -16,9 +16,10 @@
           "type": "string",
           "default": "log"
         },
-        "branchList": {
-          "description": "Comma-separated branch list to scan for dangerous workflows. Empty scans all branches. The string default will be replaced with the git default branch. Must use refs/remotes/origin/branch_name format.",
-          "type": "string"
+        "requireCODEOWNERS": {
+          "description": "Require presence of a CODEOWNERS file. Default false only validates an existing file.",
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -35,12 +36,12 @@
           "description": "Standard repo-level opt-in or opt-out configuration."
         },
         "action": {
-          "description": "Override for org-level action when present",
+          "description": "Override for org-level action when present.",
           "type": "string"
         },
-        "branchList": {
-          "description": "Comma-separated branch list to scan for dangerous workflows. Empty scans all branches. The string default will be replaced with the git default branch. Must use refs/remotes/origin/branch_name format. Repo-level list is additive to org-level list.",
-          "type": "string"
+        "requireCODEOWNERS": {
+          "description": "Require presence of a CODEOWNERS file. Default false only validates an existing file.",
+          "type": "boolean"
         }
       },
       "additionalProperties": false

@@ -1,5 +1,5 @@
 {
-  "$id": "https://json.schemastore.org/allstar.outside.schema.json",
+  "$id": "https://json.schemastore.org/allstar-outside.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Allstar Outside Collaborators policy configuration",
   "type": "object",
@@ -8,19 +8,19 @@
       "type": "object",
       "properties": {
         "user": {
-          "description": "GitHub username",
+          "description": "GitHub username.",
           "type": "string"
         },
         "repo": {
-          "description": "GitHub repository name",
+          "description": "GitHub repository name.",
           "type": "string"
         },
         "push": {
-          "description": "Allow push permission",
+          "description": "Allow push permission.",
           "type": "boolean"
         },
         "admin": {
-          "description": "Allow admin permission",
+          "description": "Allow admin permission.",
           "type": "boolean"
         }
       },
@@ -39,12 +39,12 @@
           "default": "log"
         },
         "pushAllowed": {
-          "description": "Whether outside collaborators are allowed to have push access",
+          "description": "Whether outside collaborators are allowed to have push access.",
           "type": "boolean",
           "default": true
         },
         "adminAllowed": {
-          "description": "Whether outside collaborators are allowed to have admin access",
+          "description": "Whether outside collaborators are allowed to have admin access.",
           "type": "boolean",
           "default": false
         },
@@ -70,15 +70,15 @@
           "description": "Standard repo-level opt-in or opt-out configuration."
         },
         "action": {
-          "description": "Override for org-level action when present",
+          "description": "Override for org-level action when present.",
           "type": "string"
         },
         "pushAllowed": {
-          "description": "Override for org-level pushAllowed when present",
+          "description": "Override for org-level pushAllowed when present.",
           "type": "boolean"
         },
         "adminAllowed": {
-          "description": "Override for org-level adminAllowed when present",
+          "description": "Override for org-level adminAllowed when present.",
           "type": "boolean"
         }
       },

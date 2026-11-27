@@ -1,5 +1,5 @@
 {
-  "$id": "https://json.schemastore.org/allstar.scorecard.schema.json",
+  "$id": "https://json.schemastore.org/allstar-scorecard.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Allstar Scorecard policy configuration",
   "type": "object",
@@ -42,21 +42,25 @@
           "description": "Standard repo-level opt-in or opt-out configuration."
         },
         "action": {
-          "description": "Override for org-level action when present",
+          "description": "Override for org-level action when present.",
           "type": "string"
         },
         "checks": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "Override for org-level checks when present",
-          "items": {
-            "type": "string"
-          }
+          "description": "Override for org-level checks when present.",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "threshold": {
-          "description": "Override for org-level threshold when present",
+          "description": "Override for org-level threshold when present.",
           "type": "integer"
         }
       },

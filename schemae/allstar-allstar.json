@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/allstar.schema.json",
+  "$id": "https://json.schemastore.org/allstar-allstar.json",
   "title": "allstar.yaml",
-  "description": "The schema for OpenSSF's Allstar organizational configuration",
+  "description": "The schema for OpenSSF's Allstar organizational configuration.",
   "type": "object",
   "properties": {
     "issueLabel": {
@@ -76,7 +76,7 @@
     },
     "IssueLabel": {
       "type": "string",
-      "description": "IssueLabel is the label used to tag, search, and identify GitHub Issues created by the bot. The default is specified by the operator of Allstar, currently 'allstar'",
+      "description": "IssueLabel is the label used to tag, search, and identify GitHub Issues created by the bot. The default is specified by the operator of Allstar, currently 'allstar'.",
       "examples": [
         "allstar"
       ]
@@ -135,7 +135,7 @@
     },
     "Timezone": {
       "type": "string",
-      "description": "The time zone identifier must be from the Time Zone database maintained by IANA",
+      "description": "The time zone identifier must be from the Time Zone database maintained by IANA.",
       "enum": [
         "Africa/Abidjan",
         "Africa/Accra",
@@ -717,7 +717,7 @@
     },
     "Day": {
       "type": "string",
-      "description": "Specify an alternative day to check for updates",
+      "description": "Specify an alternative day to check for updates.",
       "enum": [
         "monday",
         "tuesday",
@@ -744,7 +744,7 @@
     },
     "Time": {
       "type": "string",
-      "description": "Specify an alternative time of day to check for updates (format: hh:mm)",
+      "description": "Specify an alternative time of day to check for updates (format: hh:mm).",
       "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
     }
   }

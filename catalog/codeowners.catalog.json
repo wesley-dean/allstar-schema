@@ -1,6 +1,5 @@
 {
-  "name": "allstar.schema.json",
-  "description": "Allstar security policy configuration",
-  "fileMatch": [ "security.json"],
-  "url": "https://json.schemastore.org/allstar.security.schema.json"
+  "name": "Allstar CODEOWNERS Configuration",
+  "description": "Allstar CODEOWNERS configuration.",
+  "url": "https://json.schemastore.org/allstar-codeowners.json"
 }

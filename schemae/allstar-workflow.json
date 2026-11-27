@@ -1,7 +1,7 @@
 {
-  "$id": "https://json.schemastore.org/allstar.binary.schema.json",
+  "$id": "https://json.schemastore.org/allstar-workflow.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Allstar Binary Artifacts policy configuration",
+  "title": "Allstar Dangerous Workflow policy configuration",
   "type": "object",
   "definitions": {
     "OrgConfig": {
@@ -16,12 +16,9 @@
           "type": "string",
           "default": "log"
         },
-        "ignoreFiles": {
-          "type": "array",
-          "description": "List of file names to ignore. Binary artifacts with these names are allowed. File name only, not a path. Globs are not allowed.",
-          "items": {
-            "type": "string"
-          }
+        "branchList": {
+          "description": "Comma-separated branch list to scan for dangerous workflows. Empty scans all branches. The string default will be replaced with the git default branch. Must use refs/remotes/origin/branch_name format.",
+          "type": "string"
         }
       },
       "required": [
@@ -38,15 +35,12 @@
           "description": "Standard repo-level opt-in or opt-out configuration."
         },
         "action": {
-          "description": "Override for org-level action when present",
+          "description": "Override for org-level action when present.",
           "type": "string"
         },
-        "ignorePaths": {
-          "type": "array",
-          "description": "List of full paths to ignore. If a binary artifact is reported at these paths, it is ignored. Must be full paths with directories. Globs are not allowed. Allowed even if repo override is disabled.",
-          "items": {
-            "type": "string"
-          }
+        "branchList": {
+          "description": "Comma-separated branch list to scan for dangerous workflows. Empty scans all branches. The string default will be replaced with the git default branch. Must use refs/remotes/origin/branch_name format. Repo-level list is additive to org-level list.",
+          "type": "string"
         }
       },
       "additionalProperties": false

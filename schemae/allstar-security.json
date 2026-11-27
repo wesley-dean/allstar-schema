@@ -1,7 +1,7 @@
 {
-  "$id": "https://json.schemastore.org/allstar.codeowners.schema.json",
+  "$id": "https://json.schemastore.org/allstar-security.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Allstar CODEOWNERS policy configuration",
+  "title": "Allstar SECURITY.md policy configuration",
   "type": "object",
   "definitions": {
     "OrgConfig": {
@@ -15,11 +15,6 @@
           "description": "Which action to take. Default log; other options include issue.",
           "type": "string",
           "default": "log"
-        },
-        "requireCODEOWNERS": {
-          "description": "Require presence of a CODEOWNERS file. Default false only validates an existing file.",
-          "type": "boolean",
-          "default": false
         }
       },
       "required": [
@@ -36,12 +31,8 @@
           "description": "Standard repo-level opt-in or opt-out configuration."
         },
         "action": {
-          "description": "Override for org-level action when present",
+          "description": "Override for org-level action when present.",
           "type": "string"
-        },
-        "requireCODEOWNERS": {
-          "description": "Require presence of a CODEOWNERS file. Default false only validates an existing file.",
-          "type": "boolean"
         }
       },
       "additionalProperties": false

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-SCHEMA_PREFIX="${SCHEMA_PREFIX:-$(git rev-parse --show-toplevel)/schemae/allstar.}"
-SCHEMA_SUFFIX="${SCHEMA_SUFFIX:-.schema.json}"
+set -euo pipefail
+
+SCHEMA_PREFIX="${SCHEMA_PREFIX:-$(git rev-parse --show-toplevel)/schemae/allstar-}"
+SCHEMA_SUFFIX="${SCHEMA_SUFFIX:-.json}"
 
 # test filenames look like this:
 # tests/admin.01.yaml
@@ -11,7 +13,7 @@ for file in "$@" ; do
 
     # if we're given a directory, try again with the files in that directory
     if [ -d "$file" ] ; then
-      "$0" "${file}"*
+      "$0" "${file%/}/"*
       exit
     fi
 
@@ -30,7 +32,8 @@ for file in "$@" ; do
       echo "Comparing '$filename' with schema '$schema_filename'"
       v8r --schema "${schema_filename}" "${file}"
     else
-      echo "No test file '${schema_filename}' for '$file'"
+      echo "No schema file '${schema_filename}' for '$file'" >&2
+      exit 1
     fi
   fi
 

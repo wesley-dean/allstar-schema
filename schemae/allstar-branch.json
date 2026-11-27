@@ -1,5 +1,5 @@
 {
-  "$id": "https://json.schemastore.org/allstar.branch.schema.json",
+  "$id": "https://json.schemastore.org/allstar-branch.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Allstar Branch Protection policy configuration",
   "type": "object",
@@ -8,14 +8,18 @@
       "type": "object",
       "properties": {
         "context": {
-          "description": "Status check name that should be required",
+          "description": "Status check name that should be required.",
           "type": "string"
         },
         "appID": {
           "description": "GitHub App ID that must set the status check. When omitted, any app can provide the required status check.",
-          "type": [
-            "integer",
-            "null"
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
           ]
         }
       },
@@ -34,7 +38,7 @@
           "default": "log"
         },
         "enforceDefault": {
-          "description": "Enforce policy on default branch",
+          "description": "Enforce policy on default branch.",
           "type": "boolean",
           "default": true
         },
@@ -59,17 +63,17 @@
           "default": false
         },
         "approvalCount": {
-          "description": "Number of required pull request approvals",
+          "description": "Number of required pull request approvals.",
           "type": "integer",
           "default": 1
         },
         "dismissStale": {
-          "description": "Require approvals to be dismissed when a pull request is updated",
+          "description": "Require approvals to be dismissed when a pull request is updated.",
           "type": "boolean",
           "default": true
         },
         "blockForce": {
-          "description": "Block force pushes",
+          "description": "Block force pushes.",
           "type": "boolean",
           "default": true
         },
@@ -86,12 +90,12 @@
           }
         },
         "enforceOnAdmins": {
-          "description": "Apply branch protection rules to administrators as well",
+          "description": "Apply branch protection rules to administrators as well.",
           "type": "boolean",
           "default": false
         },
         "requireSignedCommits": {
-          "description": "Require signed commits on protected branches",
+          "description": "Require signed commits on protected branches.",
           "type": "boolean",
           "default": false
         }
@@ -110,11 +114,11 @@
           "description": "Standard repo-level opt-in or opt-out configuration."
         },
         "action": {
-          "description": "Override for org-level action when present",
+          "description": "Override for org-level action when present.",
           "type": "string"
         },
         "enforceDefault": {
-          "description": "Override for org-level enforceDefault when present",
+          "description": "Override for org-level enforceDefault when present.",
           "type": "boolean"
         },
         "enforceBranches": {
@@ -125,31 +129,31 @@
           }
         },
         "requireApproval": {
-          "description": "Override for org-level requireApproval when present",
+          "description": "Override for org-level requireApproval when present.",
           "type": "boolean"
         },
         "requireCodeOwnerReviews": {
-          "description": "Override for org-level requireCodeOwnerReviews when present",
+          "description": "Override for org-level requireCodeOwnerReviews when present.",
           "type": "boolean"
         },
         "approvalCount": {
-          "description": "Override for org-level approvalCount when present",
+          "description": "Override for org-level approvalCount when present.",
           "type": "integer"
         },
         "dismissStale": {
-          "description": "Override for org-level dismissStale when present",
+          "description": "Override for org-level dismissStale when present.",
           "type": "boolean"
         },
         "blockForce": {
-          "description": "Override for org-level blockForce when present",
+          "description": "Override for org-level blockForce when present.",
           "type": "boolean"
         },
         "enforceOnAdmins": {
-          "description": "Override for org-level enforceOnAdmins when present",
+          "description": "Override for org-level enforceOnAdmins when present.",
           "type": "boolean"
         },
         "requireUpToDateBranch": {
-          "description": "Override for org-level requireUpToDateBranch when present",
+          "description": "Override for org-level requireUpToDateBranch when present.",
           "type": "boolean"
         },
         "requireStatusChecks": {
@@ -160,7 +164,7 @@
           }
         },
         "requireSignedCommits": {
-          "description": "Override for org-level requireSignedCommits when present",
+          "description": "Override for org-level requireSignedCommits when present.",
           "type": "boolean"
         }
       },

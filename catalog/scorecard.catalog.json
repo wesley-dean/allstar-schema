@@ -1,6 +1,5 @@
 {
-  "name": "allstar.scorecard.schema.json",
-  "description": "Allstar Scorecard policy configuration",
-  "fileMatch": [ "scorecard.json"],
-  "url": "https://json.schemastore.org/allstar.scorecard.schema.json"
+  "name": "Allstar Scorecard Configuration",
+  "description": "Allstar Scorecard configuration.",
+  "url": "https://json.schemastore.org/allstar-scorecard.json"
 }
