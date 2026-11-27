@@ -1,6 +1,5 @@
 {
-  "name": "allstar.catalog.schema.json",
-  "description": "Allstar Action configuration",
-  "fileMatch": [ "actions.json"],
-  "url": "https://json.schemastore.org/allstar.action.schema.json"
+  "name": "Allstar Action Configuration",
+  "description": "Allstar Action configuration.",
+  "url": "https://json.schemastore.org/allstar-action.json"
 }

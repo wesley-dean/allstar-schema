@@ -1,6 +1,8 @@
 {
-  "name": "allstar.allstar.schema.json",
-  "description": "Allstar organizational configuration",
-  "fileMatch": [ "allstar.json"],
-  "url": "https://json.schemastore.org/allstar.allstar.schema.json"
+  "name": "Allstar Organizational Configuration",
+  "description": "Allstar Organizational configuration.",
+  "url": "https://json.schemastore.org/allstar-allstar.json",
+  "fileMatch": [
+    "allstar.json"
+  ]
 }

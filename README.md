@@ -21,10 +21,10 @@ To validate that the schema files are valid, use:
 
 ```bash
 # validate a single document
-bin/validate.bash schemae/allstar.admin.schema.yaml
+bin/validate.bash schemae/allstar-admin.json
 
-# validate all schema files with a .yaml extension
-bin/validate.bash schemae/*.yaml
+# validate all schema files with a .json extension
+bin/validate.bash schemae/*.json
 
 # validate all schema files by passing the schemae directory
 bin/validate.bash schemae/
@@ -55,3 +55,13 @@ bin/test.bash tests/
 Note: test files are named for the file that they're testing, a test collection
 number, and the `.yaml` extension.  For example, `tests/outside.01.yaml` tests
 the `outside` file and belongs to collection number 1.
+
+## SchemaStore publication checks
+
+Schema filenames use `allstar-<policy>.json`. Catalog URLs and schema `$id`
+values use the same filenames. Generic configuration basenames are deliberately
+not auto-matched; consumers can select the appropriate schema explicitly.
+
+With Node.js and AJV 8 installed locally, run `node bin/check-schemae.cjs`
+to verify catalog consistency, strict compilation, and nullable type regression
+cases. Run the existing v8r fixture tests separately.

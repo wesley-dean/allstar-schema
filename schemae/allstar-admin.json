@@ -1,5 +1,5 @@
 {
-  "$id": "https://json.schemastore.org/allstar.admin.schema.json",
+  "$id": "https://json.schemastore.org/allstar-admin.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Allstar Repository Administrators policy configuration",
   "type": "object",
@@ -12,7 +12,7 @@
           "type": "string"
         },
         "ownerlessAllowed": {
-          "description": "Whether repositories are allowed to have no administrators",
+          "description": "Whether repositories are allowed to have no administrators.",
           "type": "boolean",
           "default": false
         },
@@ -64,7 +64,7 @@
           "default": "log"
         },
         "ownerlessAllowed": {
-          "description": "Whether repositories are allowed to have no administrators",
+          "description": "Whether repositories are allowed to have no administrators.",
           "type": "boolean",
           "default": false
         },
@@ -108,27 +108,27 @@
           "description": "Standard repo-level opt-in or opt-out configuration."
         },
         "action": {
-          "description": "Override for org-level action when present",
+          "description": "Override for org-level action when present.",
           "type": "string"
         },
         "ownerlessAllowed": {
-          "description": "Override for org-level ownerlessAllowed when present",
+          "description": "Override for org-level ownerlessAllowed when present.",
           "type": "boolean"
         },
         "userAdminsAllowed": {
-          "description": "Override for org-level userAdminsAllowed when present",
+          "description": "Override for org-level userAdminsAllowed when present.",
           "type": "boolean"
         },
         "maxNumberUserAdmins": {
-          "description": "Override for org-level maxNumberUserAdmins when present",
+          "description": "Override for org-level maxNumberUserAdmins when present.",
           "type": "integer"
         },
         "teamAdminsAllowed": {
-          "description": "Override for org-level teamAdminsAllowed when present",
+          "description": "Override for org-level teamAdminsAllowed when present.",
           "type": "boolean"
         },
         "maxNumberAdminTeams": {
-          "description": "Override for org-level maxNumberAdminTeams when present",
+          "description": "Override for org-level maxNumberAdminTeams when present.",
           "type": "integer"
         }
       },
